@@ -1,12 +1,25 @@
-# Secret Santa Assignment App
+# Secret Santa Assignment System 🎅🎁
 
-## 📌 Overview
+## Overview
 
-The **Secret Santa Assignment App** automates the assignment of Secret Santa gift-givers and receivers while ensuring that:
+Company "Acme" has decided to organize a Secret Santa event among its employees. Each employee is required to choose another employee as their Secret Child, to whom they will anonymously give a gift during the event. The company wants to automate the process of assigning secret children to employees based on the provided employee information.
 
-- Employees do not get themselves as their Secret Santa.
-- Employees do not receive the same Secret Santa as the previous year (if previous assignments are provided).
-- The assignments are randomized and stored in a CSV file for easy access.
+However, the Secret Santa system has some additional requirements and constraints to ensure fairness and prevent repeated pairings from previous years.
+
+## Features
+
+- ✅ **Automated Assignments:** Randomly assigns a Secret Child to each employee.
+- ✅ **Previous Year Validation:** Ensures no employee gets the same Secret Child as last year.
+- ✅ **CSV Upload:** Accepts employee data and previous year’s assignments in CSV format.
+- ✅ **Download Assignments:** Generates and allows downloading of Secret Santa assignments.
+- ✅ **Table Display:** Shows assignments on the webpage for easy viewing.
+
+## How to Use
+
+1. **Upload Employees CSV:** Choose a CSV file containing employee details.
+2. **(Optional) Upload Previous Assignments CSV:** Prevents repeated pairings.
+3. **Click "Get Secret Santa":** The system will process and generate assignments.
+4. **Download or View Assignments:** A table will display results, and a CSV file can be downloaded.
 
 ## 🏗️ Solution Breakdown
 
@@ -89,3 +102,15 @@ The app provides error messages for:
 - Missing required CSV fields.
 - Invalid file format.
 - Issues generating valid assignments.
+
+## Tech Stack
+
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Node.js, Express
+- **Storage:** CSV File Handling
+
+## Future Improvements
+
+- 🔹 Add user authentication for secured access.
+- 🔹 Send email notifications with assignments.
+- 🔹 Improve UI/UX for a better experience.
