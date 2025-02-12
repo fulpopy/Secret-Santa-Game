@@ -4,7 +4,7 @@ const uploadMiddleware = require("./middlewares/uploadMiddleware");
 const { processSecretSanta } = require("./controllers/secretSantaController");
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.post("/api/secret-santa", uploadMiddleware, processSecretSanta);
 
