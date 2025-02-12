@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secret Santa Game</title>
+  </head>
+  <body>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      input[type="file"] {
+        margin-bottom: 20px;
+      }
+      button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      #download-link {
+        margin-top: 20px;
+        display: none;
+      }
+    </style>
+
+    <div><h1>Secret Santa Game</h1></div>
+    <div>
+      <form id="uploadForm">
+        <label for="employees">Upload CSV file of employees :</label>
+        <input
+          type="file"
+          id="employees"
+          name="employees"
+          accept=".csv"
+          required
+        />
+
+        <label for="prev-year-secret-santa">
+          Upload CSV file for previous year's Secret Santa (optional):
+        </label>
+        <input
+          type="file"
+          id="prev-year-secret-santa"
+          name="prev-year-secret-santa"
+          accept=".csv"
+        />
+
+        <button type="submit">Start Game</button>
+      </form>
+      <a id="download-link" href="#" download="secret_santa_assignments.csv"
+        >Download Result</a
+      >
+    </div>
+
+    <script>
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const formData = new FormData();
+          formData.append(
+            "employees",
+            document.getElementById("employees").files[0]
+          );
+          if (
+            document.getElementById("prev-year-secret-santa").files.length > 0
+          ) {
+            formData.append(
+              "prev-year-secret-santa",
+              document.getElementById("prev-year-secret-santa").files[0]
+            );
+          }
+
+          const response = await fetch("/api/secret-santa", {
+            method: "POST",
+            body: formData,
+          });
+
+          if (response.ok) {
+            const blob = await response.blob();
+            const downloadLink = document.getElementById("download-link");
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.style.display = "block";
+          } else {
+            alert("Error processing Secret Santa. Please try again.");
+          }
+        });
+    </script>
+  </body>
+</html>
